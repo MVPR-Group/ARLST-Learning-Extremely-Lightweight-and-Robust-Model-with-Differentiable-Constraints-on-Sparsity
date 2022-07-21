@@ -1,0 +1,54 @@
+# ->->->->-> Primary <-<-<-<-<-
+exp_name: "CCT"
+result_dir: "./trained_models"
+num_classes: 10
+exp_mode: "pretrain"
+layer_type: "dense"
+init_type: "kaiming_normal"
+
+
+# ->->->->-> Pruning <-<-<-<-<-
+k: 1
+
+# ->->->->-> Train <-<-<-<-<-
+trainer: "base"
+epochs: 300
+optimizer: "adamw"
+lr: 0.0005
+lr_schedule: "cosine"
+wd: 0.03
+momentum: 0.90
+#warmup
+warmup_epochs: 5
+warmup_lr: 0.0002
+
+
+# ->->->->-> Eval <-<-<-<-<-
+val_method: adv_CCT
+
+
+# ->->->->-> Dataset <-<-<-<-<-
+dataset: CIFAR10
+batch_size: 128
+test_batch_size: 128
+data_dir: "./datasets"
+data_fraction: 1.0
+
+# ->->->->-> Semi-supervised training <-<-<-<-<-
+semisup_data: "tinyimages"
+semisup_fraction: 1.0
+
+# ->->->->-> Adv <-<-<-<-<-
+epsilon: 0.015
+num_steps: 1
+step_size: 0.015
+clip_min: 0
+clip_max: 1
+distance: "l_inf"
+beta: 6.0
+
+
+# ->->->->-> Misc <-<-<-<-<-
+gpu: "5"
+seed: 1234
+print_freq: 100
